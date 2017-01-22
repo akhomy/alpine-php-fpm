@@ -1,0 +1,57 @@
+#!/bin/sh
+
+set -e
+
+if [ -n "$PHP_SENDMAIL_PATH" ]; then
+      sed -i 's@^;sendmail_path.*@'"sendmail_path = ${PHP_SENDMAIL_PATH}"'@' /etc/php5/php.ini
+fi
+
+if [ "$CRONTAB_ENABLED" -eq "1" ]; then
+     crontab /home/crontasks.txt
+     /usr/sbin/crond -L 8
+fi
+
+if [ "$PHP_XDEBUG_ENABLED" -eq "1" ]; then
+     sed -i 's/^;zend_extension.*/zend_extension = xdebug.so/' /etc/php5/conf.d/xdebug.ini
+fi
+
+if [ -n "$PHP_XDEBUG_PORT" ]; then
+     sed -i 's@^xdebug.remote_port.*@'"xdebug\.remote_port = ${PHP_XDEBUG_PORT}"'@' /etc/php5/conf.d/xdebug.ini
+fi
+
+if [ -n "$PHP_MEMORY_LIMIT" ]; then
+     sed -i 's@^memory_limit.*@'"memory_limit = ${PHP_MEMORY_LIMIT}"'@' /etc/php5/php.ini
+fi
+
+if [ -n "$PHP_MAX_EXECUTION_TIME" ]; then
+     sed -i 's@^max_execution_time.*@'"max_execution_time = ${PHP_MAX_EXECUTION_TIME}"'@' /etc/php5/php.ini
+fi
+
+if [ -n "$PHP_POST_MAX_SIZE" ]; then
+     sed -i 's@^post_max_size.*@'"post_max_size = ${PHP_POST_MAX_SIZE}"'@' /etc/php5/php.ini
+fi
+
+if [ -n "$PHP_UPLOAD_MAX_FILESIZE" ]; then
+     sed -i 's@^upload_max_filesize.*@'"upload_max_filesize = ${PHP_UPLOAD_MAX_FILESIZE}"'@' /etc/php5/php.ini
+fi
+
+    if [ -n "$PHP_ALLOW_URL_FOPEN" ]; then
+     sed -i 's@^allow_url_fopen.*@'"allow_url_fopen = ${PHP_ALLOW_URL_FOPEN}"'@' /etc/php5/php.ini
+fi
+
+if [ -n "$PHP_ALWAYS_POPULATE_RAW_POST_DATA" ]; then
+     sed -i 's@^always_populate_raw_post_data.*@'"always_populate_raw_post_data = ${PHP_ALWAYS_POPULATE_RAW_POST_DATA}"'@' /etc/php5/php.ini
+fi
+
+if [ -n "$PHP_SENDMAIL_HOST" -a "$PHP_SENDMAIL_PORT" ]; then
+     sed -i 's@^relayhost.*@'"relayhost = [$PHP_SENDMAIL_HOST]:$PHP_SENDMAIL_PORT"'@' /etc/postfix/main.cf
+     sed -i 's@^myhostname.*@'"myhostname = $PHP_SENDMAIL_HOST"'@' /etc/postfix/main.cf
+     /usr/sbin/postfix -c /etc/postfix start
+fi
+
+if [ -n "$PHP_FPM_PORT" ]; then
+      sed -i 's@^listen.*@'"listen  = ${PHP_FPM_PORT}"'@' /etc/php5/php-fpm.conf
+fi
+
+/usr/bin/php-fpm -F
+

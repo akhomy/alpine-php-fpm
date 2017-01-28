@@ -24,6 +24,7 @@ ENV PHP_REDIS_VERSION 2.2.8
 #Twig version
 ENV TWIG_VERSION v1.24.2
 ENV TWIG_PATH Twig-1.24.2
+ENV DRUSH_VERSION 8.x
 #install mysql-client, need for drush
 RUN apk add --no-cache mysql-client
 #install php-fpm

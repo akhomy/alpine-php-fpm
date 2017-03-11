@@ -25,6 +25,10 @@ ENV PHP_REDIS_VERSION 2.2.8
 ENV TWIG_VERSION v1.24.2
 ENV TWIG_PATH Twig-1.24.2
 ENV DRUSH_VERSION 8.x
+# Recreate user with correct params
+RUN set -x && \
+	addgroup -g 82 -S www-data && \
+	adduser -u 82 -D -S -s /bin/bash -G www-data www-data
 #install mysql-client, need for drush
 RUN apk add --no-cache mysql-client
 #install php-fpm
@@ -146,10 +150,9 @@ RUN  rm -rf /var/lib/apt/lists/* && \
      rm -rf /var/www/localhost/htdocs/* && \
      rm -rf /temp_docker
 
-#Setup temp directory
-#WORKDIR /var/www/localhost/htdocs
-#VOLUME ["/var/www/localhost/htdocs"]     
 COPY docker-entrypoint.sh /usr/local/bin/ 
-RUN  chmod +x /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh && mkdir -p /var/www/localhost/htdocs && \
+chown -R www-data:www-data /var/www/
+WORKDIR /var/www/localhost/htdocs
 ENTRYPOINT ["docker-entrypoint.sh"]
 #EXPOSE 8000 9000

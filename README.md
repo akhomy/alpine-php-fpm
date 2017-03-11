@@ -38,6 +38,6 @@ docker run -v /hostDir:/var/www/localhost/htdocs -d -e PHP_FPM_PORT="9000" -e PH
 ### How to use drush
 
 After run container, please run:
-docker exec -it php-fpm-container-name /bin/ash
+docker exec -it php-fpm-container-name --user www-data /bin/ash
 Inside container go to php file dir - cd /var/www/html/localhost 
 And run drush

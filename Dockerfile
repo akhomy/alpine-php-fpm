@@ -153,6 +153,6 @@ RUN  rm -rf /var/lib/apt/lists/* && \
 COPY docker-entrypoint.sh /usr/local/bin/ 
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh && mkdir -p /var/www/localhost/htdocs && \
 chown -R www-data:www-data /var/www/
-WORKDIR /var/www/localhost/htdocs
+#WORKDIR /var/www/localhost/htdocs
 ENTRYPOINT ["docker-entrypoint.sh"]
 #EXPOSE 8000 9000

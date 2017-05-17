@@ -2,6 +2,11 @@
 
 set -e
 
+# Copy user defined configs from temp folder to existing.
+if [ "$(ls -A /temp_configs_dir)" ]; then
+  cp -f -R /temp_configs_dir/* /etc/
+fi
+
 if [ -n "$PHP_SENDMAIL_PATH" ]; then
       sed -i 's@^;sendmail_path.*@'"sendmail_path = ${PHP_SENDMAIL_PATH}"'@' /etc/php5/php.ini
 fi

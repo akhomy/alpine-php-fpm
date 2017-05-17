@@ -32,7 +32,7 @@ if [ -n "$PHP_MAX_FILE_UPLOADS" ]; then
 fi
 
 if [ -n "$PHP_MAX_INPUT_NESTING_LEVEL" ]; then
-     sed -i 's@^max_input_nesting_level.*@'"max_input_nesting_level = ${PHP_MAX_INPUT_NESTING_LEVEL}"'@' /etc/php5/php.ini
+     sed -i 's@^;max_input_nesting_level.*@'"max_input_nesting_level = ${PHP_MAX_INPUT_NESTING_LEVEL}"'@' /etc/php5/php.ini
 fi
 
 if [ -n "$PHP_MAX_INPUT_TIME" ]; then
@@ -40,7 +40,7 @@ if [ -n "$PHP_MAX_INPUT_TIME" ]; then
 fi
 
 if [ -n "$PHP_MAX_INPUT_VARS" ]; then
-     sed -i 's@^max_input_vars.*@'"max_input_vars = ${PHP_MAX_INPUT_VARS}"'@' /etc/php5/php.ini
+     sed -i 's@^; max_input_vars.*@'"max_input_vars = ${PHP_MAX_INPUT_VARS}"'@' /etc/php5/php.ini
 fi
 
 if [ -n "$PHP_POST_MAX_SIZE" ]; then

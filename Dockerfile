@@ -155,8 +155,8 @@ RUN  rm -rf /var/lib/apt/lists/* && \
      rm -rf /var/www/localhost/htdocs/* && \
      rm -rf /temp_docker
      
-#Create /temp__configs_dir for use
-RUN mkdir /temp__configs_dir && chmod -R +x /temp__configs_dir && cd /temp__configs_dir
+#Create /temp_configs_dir for use
+RUN mkdir /temp_configs_dir && chmod -R +x /temp_configs_dir && cd /temp_configs_dir
 
 COPY docker-entrypoint.sh /usr/local/bin/ 
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh && mkdir -p /var/www/localhost/htdocs && \

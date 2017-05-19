@@ -77,5 +77,6 @@ if [ -z "$USE_ONLY_CONFIGS" ]; then
   fi
 
 fi
+
 /usr/bin/php-fpm -F
 

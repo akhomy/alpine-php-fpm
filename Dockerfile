@@ -18,7 +18,7 @@ RUN set -e && \
 	addgroup -g 1000 -S www-data && \
 	adduser -u 1000 -D -S -s /bin/bash -G www-data www-data && \
 	sed -i '/^www-data/s/!/*/' /etc/shadow
-	
+
 #install mysql-client, need for drush
 RUN apk add --no-cache mysql-client
 # Add memcached
@@ -26,8 +26,8 @@ RUN apk add libmemcached-dev redis
 #Create /temp_dir for using
 RUN mkdir /temp_docker && chmod -R +x /temp_docker && cd /temp_docker
 #install php-fpm
-RUN apk add --no-cache php7-fpm 
-#Install some php libs                        
+RUN apk add --no-cache php7-fpm
+#Install some php libs
 RUN apk add --no-cache php7-dev php7-openssl \
     php7-common php7-ftp php7-gd \
     php7-dom php7-pdo_mysql php7-sockets \
@@ -38,7 +38,7 @@ RUN apk add --no-cache php7-dev php7-openssl \
     php7-mcrypt php7-curl php7-json php7-mysqlnd\
     php7-opcache php7-ctype php7-xml \
     php7-xsl php7-ldap php7-xmlwriter php7-xmlreader \
-    php7-intl php7-tokenizer php7-session  \ 
+    php7-intl php7-tokenizer php7-session  \
     php7-pcntl php7-posix php7-apcu php7-simplexml
 #Copy crontab file for use later
 COPY crontasks.txt /home
@@ -56,31 +56,31 @@ RUN cd /temp_docker && git clone https://github.com/php/pecl-php-uploadprogress.
     ./configure && \
     make && \
     make install
-    
+
 #Install memcached
 RUN cd /temp_docker && git clone https://github.com/php-memcached-dev/php-memcached && \
     cd php-memcached && git checkout php7 && git pull && \
     phpize && \
     ./configure --with-libmemcached-dir=no --disable-memcached-sasl && \
     make && \
-    make install  
+    make install
 
 #Install imagemagick
 RUN sed -ie 's/-n//g' /usr/bin/pecl && \
     yes | pecl install imagick && \
     echo 'extension=imagick.so' > /etc/php7/conf.d/imagick.ini && \
     rm -rf /tmp/pear
-    
+
 #Install xdebug
 RUN cd /temp_docker && wget https://xdebug.org/files/xdebug-$XDEBUG_VERSION.tgz
-RUN cd /temp_docker && tar -xvzf xdebug-$XDEBUG_VERSION.tgz 
-RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION && phpize 
+RUN cd /temp_docker && tar -xvzf xdebug-$XDEBUG_VERSION.tgz
+RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION && phpize
 RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION && ./configure
 RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION &&  make
 RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION &&  make test
 RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION &&  echo ";zend_extension = xdebug.so" > /etc/php7/conf.d/xdebug.ini
 RUN cp /temp_docker/xdebug-$XDEBUG_VERSION/modules/xdebug.so /usr/lib/php7/modules/xdebug.so
-    
+
 RUN sed -i \
     -e "$ a xdebug.default_enable = 0" \
     -e "$ a xdebug.remote_enable = 1" \
@@ -93,11 +93,11 @@ RUN sed -i \
 
 #Install php-redis
 RUN cd /temp_docker && git clone https://github.com/phpredis/phpredis.git && cd phpredis && \
-    git checkout php7 && git pull && \ 
+    git checkout php7 && git pull && \
     phpize  && \
     ./configure  && \
     make && \
-    make install 
+    make install
 
 #Configure php-fpm by copy our config files
 RUN rm /etc/php7/php-fpm.conf
@@ -120,13 +120,13 @@ RUN sed -i \
     -e "s/^;always_populate_raw_post_data.*/always_populate_raw_post_data = -1/" \
     -e "s/^;sendmail_path.*/;sendmail_path = opensmtpd/" \
     /etc/php7/php.ini && \
-        
+
     # Some git tweaks
     git config --global user.name "Lordius PHP-FPM" && \
     git config --global user.email "admin@lordius.com" && \
     git config --global push.default current
-    
-#Add setup drush and composer script   
+
+#Add setup drush and composer script
 COPY setup_extensions/composer_drush.sh /temp_docker/composer_drush.sh
 RUN  chmod -R +x /temp_docker && cd /temp_docker && bash /temp_docker/composer_drush.sh $DRUSH_VERSION
 #Clean trash
@@ -134,11 +134,11 @@ RUN  rm -rf /var/lib/apt/lists/* && \
      rm -rf /var/cache/apk/* && \
      rm -rf /var/www/localhost/htdocs/* && \
      rm -rf /temp_docker
-     
+
 #Create /temp_configs_dir for use
 RUN mkdir /temp_configs_dir && chmod -R +x /temp_configs_dir && cd /temp_configs_dir
 
-COPY docker-entrypoint.sh /usr/local/bin/ 
+COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh && mkdir -p /var/www/localhost/htdocs && \
 chown -R www-data:www-data /var/www/
 #WORKDIR /var/www/localhost/htdocs

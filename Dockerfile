@@ -21,7 +21,7 @@ RUN apk add --no-cache php5-fpm
 #Install some php libs                        
 RUN apk add --no-cache php5-dev php5-openssl php5-pear \
     php5-common php5-cli php5-ftp php5-gd \
-    php5-dom php5-pdo_mysql php5-sockets \
+    php5-pdo_mysql php5-sockets \
     php5-zlib php5-bz2  php5-pear \
     php5-exif php5-phar php5-zip php5-calendar \
     php5-iconv php5-imap php5-soap php5-memcache \

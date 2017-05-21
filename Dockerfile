@@ -22,7 +22,7 @@ RUN set -e && \
 #install mysql-client, need for drush
 RUN apk add --no-cache mysql-client
 # Add memcached
-RUN apk add libmemcached-dev cyrus-sasl-dev redis
+RUN apk add libmemcached-dev redis
 #Create /temp_dir for using
 RUN mkdir /temp_docker && chmod -R +x /temp_docker && cd /temp_docker
 #install php-fpm

@@ -1,6 +1,6 @@
 #!/bin/bash
 cd /temp_docker
-curl -sS https://getcomposer.org/installer | php
+wget https://getcomposer.org/installer && php installer
 mv composer.phar /usr/local/bin/composer
 ln -s /usr/local/bin/composer /usr/bin/composer
 

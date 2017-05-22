@@ -2,7 +2,6 @@
 FROM lordius/alpine-base:edge
 MAINTAINER lordius<andriy.khomych@gmail.com>
 #Envs
-ENV PHP_VERSION 7.1.5
 ENV XDEBUG_VERSION 2.5.4
 #Twig version, compitable with php from 1.28.0
 ENV TWIG_VERSION v1.33.2

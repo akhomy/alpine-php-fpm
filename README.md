@@ -1,5 +1,5 @@
 ### Php-fpm
-PHP5 or PHP7 FPM image based on Alpine linux. There are postfix, crontab, drush and xdebug inside.
+PHP-5 or PHP-7 FPM image based on Alpine linux. There are postfix, crontab, drush and xdebug inside.
 Configured with redis, twig only for PHP 5.
 
 ### Include own configs
@@ -30,34 +30,24 @@ Configured with redis, twig only for PHP 5.
 ### How to run
 
 <p>Example of run with enabled cron, sendmail and xdebug:</p>
-<code>
-docker run -v /hostDir:/var/www/localhost/htdocs -d -e CRONTAB_ENABLED="1" -e PHP_FPM_PORT="9000" -e PHP_SENDMAIL_PATH="/usr/sbin/sendmail -i -t" -e PHP_SENDMAIL_HOST="smtp.host" -e PHP_SENDMAIL_PORT="1025" -e PHP_XDEBUG_ENABLED="1" -e PHP_XDEBUG_PORT="9010" -e PHP_MEMORY_LIMIT="1024M" --name php-fpm  lordius/alpine-php_fpm:php-5.6.29
-</code>
+<code>docker run -v /hostDir:/var/www/localhost/htdocs -d -e CRONTAB_ENABLED="1" -e PHP_FPM_PORT="9000" -e PHP_SENDMAIL_PATH="/usr/sbin/sendmail -i -t" -e PHP_SENDMAIL_HOST="smtp.host" -e PHP_SENDMAIL_PORT="1025" -e PHP_XDEBUG_ENABLED="1" -e PHP_XDEBUG_PORT="9010" -e PHP_MEMORY_LIMIT="1024M" --name php-fpm  lordius/alpine-php_fpm:php-5.6.29</code>
 
 
 ### How to use cron
 <p>After enabling CRONTAB_ENABLED="1" option, you need mount crontask.txt file to container file - <code> /home/crontasks.txt </code>, example:</p>
-<code>
-docker run -v /hostDir:/var/www/localhost/htdocs -v  crontasks.txt:/home/crontasks.txt -d -e PHP_FPM_PORT="9000" -e CRONTAB_ENABLED="1" --name php-fpm  lordius/alpine-php_fpm:php-5.6.29
-</code>
+<code>docker run -v /hostDir:/var/www/localhost/htdocs -v  crontasks.txt:/home/crontasks.txt -d -e PHP_FPM_PORT="9000" -e CRONTAB_ENABLED="1" --name php-fpm  lordius/alpine-php_fpm:php-5.6.29</code>
 
 ### How to use xdebug
 <p>You need run container with PHP_XDEBUG_ENABLED=1 and provide PHP_XDEBUG_PORT port:</p>
-<code>
-docker run -v /hostDir:/var/www/localhost/htdocs -d -e PHP_FPM_PORT="9000" -e PHP_XDEBUG_ENABLED="1" -e PHP_XDEBUG_PORT="9010" --name php-fpm  lordius/alpine-php_fpm:php-5.6.29
-</code>
+<code>docker run -v /hostDir:/var/www/localhost/htdocs -d -e PHP_FPM_PORT="9000" -e PHP_XDEBUG_ENABLED="1" -e PHP_XDEBUG_PORT="9010" --name php-fpm  lordius/alpine-php_fpm:php-5.6.29</code>
 
 ### How to configure with mail service
 <p>You need listen smtp service that is linked inside containers:</p>
-<code>
-docker run -v /hostDir:/var/www/localhost/htdocs -d -e PHP_FPM_PORT="9000" -e PHP_SENDMAIL_PATH="/usr/sbin/sendmail -i -t" -e PHP_SENDMAIL_HOST="smtp.host" -e PHP_SENDMAIL_PORT="1025" --name php-fpm  lordius/alpine-php_fpm:php-5.6.29
-</code>
+<code>docker run -v /hostDir:/var/www/localhost/htdocs -d -e PHP_FPM_PORT="9000" -e PHP_SENDMAIL_PATH="/usr/sbin/sendmail -i -t" -e PHP_SENDMAIL_HOST="smtp.host" -e PHP_SENDMAIL_PORT="1025" --name php-fpm  lordius/alpine-php_fpm:php-5.6.29</code>
 
 ### How to use drush
 
 <p>After run container, please run:</p>
-</code>
-docker exec -it php-fpm-container-name --user www-data /bin/ash
-<code>
+</code>docker exec -it php-fpm-container-name --user www-data /bin/ash<code>
 <p>Inside container go to php file dir - <code> cd /var/www/html/localhost</code> </p>
 <p>You could check work with run drush.</p>

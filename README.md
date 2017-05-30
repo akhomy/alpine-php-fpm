@@ -34,7 +34,7 @@ Configured with redis, twig only for PHP 5.
 
 
 ### How to use cron
-<p>After enabling CRONTAB_ENABLED="1" option, you need mount crontask.txt file to container file - <code> /home/crontasks.txt </code>, example:</p>
+<p>After enabling CRONTAB_ENABLED="1" option, you need mount crontask.txt file to container file - <code>/home/crontasks.txt</code>, example:</p>
 <code>docker run -v /hostDir:/var/www/localhost/htdocs -v  crontasks.txt:/home/crontasks.txt -d -e PHP_FPM_PORT="9000" -e CRONTAB_ENABLED="1" --name php-fpm  lordius/alpine-php_fpm:php-5.6.29</code>
 
 ### How to use xdebug

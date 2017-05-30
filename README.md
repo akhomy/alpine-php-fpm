@@ -3,7 +3,7 @@ PHP-5 or PHP-7 FPM image based on Alpine Linux. There are Postfix, Crontab, Drus
 Configured with Redis, Twig only for PHP-5.
 
 ### Include own configs
-<p>You could mount to <code>/temp_configs_dir</code> with you volume and use own configs.</p>
+<p>You could mount to <code>/temp_configs_dir</code> with your volume and use own configs.</p>
 <p>USE_ONLY_CONFIGS - disable using of the custom ENV in list bellow.</p>
 
 ### Available options

@@ -1,6 +1,6 @@
 ### PHP-FPM
 PHP-7 FPM image based on Alpine Linux. There are Postfix, Crontab, Drush and Xdebug inside.
-Configured with Redis, Twig only for PHP-5.
+Configured with Redis.
 
 ### Include own configs
 <p>You could mount to <code>/temp_configs_dir</code> with your volume and use own configs.</p>

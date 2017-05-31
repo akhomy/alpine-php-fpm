@@ -1,5 +1,5 @@
 ### PHP-FPM
-PHP-7 FPM image based on Alpine Linux. There are Postfix, Crontab, Drush and Xdebug inside.
+PHP-7 FPM image based on Alpine Linux. There are Postfix, SSH, RSync, Crontab, Drush and Xdebug inside.
 Configured with Redis.
 
 ### Include own configs

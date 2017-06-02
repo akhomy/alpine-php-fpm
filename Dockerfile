@@ -54,7 +54,8 @@ RUN cd /temp_docker && git clone https://github.com/php/pecl-php-uploadprogress.
     phpize && \
     ./configure && \
     make && \
-    make install
+    make install && \
+    echo 'extension=uploadprogress.so' > /etc/php7/conf.d/uploadprogress.ini
 
 #Install memcached
 RUN cd /temp_docker && git clone https://github.com/php-memcached-dev/php-memcached && \
@@ -62,7 +63,8 @@ RUN cd /temp_docker && git clone https://github.com/php-memcached-dev/php-memcac
     phpize && \
     ./configure --with-libmemcached-dir=no --disable-memcached-sasl && \
     make && \
-    make install
+    make install && \
+    echo 'extension=memcached.so' > /etc/php7/conf.d/memcached.ini
 
 #Install imagemagick
 RUN sed -ie 's/-n//g' /usr/bin/pecl && \
@@ -96,7 +98,8 @@ RUN cd /temp_docker && git clone https://github.com/phpredis/phpredis.git && cd 
     phpize  && \
     ./configure  && \
     make && \
-    make install
+    make install && \
+    echo 'extension=redis.so' > /etc/php7/conf.d/redis.ini
 
 #Configure php-fpm by copy our config files
 RUN rm /etc/php7/php-fpm.conf

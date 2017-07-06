@@ -1,4 +1,4 @@
-#lordius/alpine-php_fpm:php-7.1.5
+#lordius/alpine-php_fpm:php-7
 FROM lordius/alpine-base:edge
 MAINTAINER lordius<andriy.khomych@gmail.com>
 #Envs

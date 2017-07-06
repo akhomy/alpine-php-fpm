@@ -1,4 +1,4 @@
-#lordius/alpine-php_fpm:php-5.6.29
+#lordius/alpine-php_fpm:php-5
 FROM lordius/alpine-base:v3.4
 MAINTAINER lordius<andriy.khomych@gmail.com>
 #Envs
@@ -140,7 +140,8 @@ RUN mkdir /temp_configs_dir && chmod -R +x /temp_configs_dir && cd /temp_configs
 
 COPY docker-entrypoint.sh /usr/local/bin/ 
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh && mkdir -p /var/www/localhost/htdocs && \
-chown -R www-data:www-data /var/www/
+chown -R www-data:www-data /var/www/ && \
+chown -R www-data:www-data /var/log/
 #WORKDIR /var/www/localhost/htdocs
 ENTRYPOINT ["docker-entrypoint.sh"]
 #EXPOSE 8000 9000

@@ -142,6 +142,6 @@ COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh && mkdir -p /var/www/localhost/htdocs && \
 chown -R www-data:www-data /var/www/ && \
 chown -R www-data:www-data /var/log/
-#WORKDIR /var/www/localhost/htdocs
+WORKDIR /var/www/localhost/htdocs
 ENTRYPOINT ["docker-entrypoint.sh"]
 #EXPOSE 8000 9000

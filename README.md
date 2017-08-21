@@ -69,7 +69,7 @@ After enabling option **CRONTAB_ENABLED="1"**, you need to mount file **crontask
 ## How to use Xdebug
 You need to run container with option **PHP_XDEBUG_ENABLED=1** and provide value port for the option **PHP_XDEBUG_PORT**:
 
-`docker run -v /hostDir:/var/www/localhost/htdocs -d -e PHP_FPM_PORT="9000" -e PHP_XDEBUG_ENABLED="1" -e PHP_XDEBUG_PORT="9010" --name php-fpm  lordius/alpine-php_fpm:php-7`
+`docker run -v /hostDir:/var/www/localhost/htdocs -d -e PHP_FPM_PORT="9000" -e PHP_XDEBUG_ENABLED="1" -e PHP_XDEBUG_PORT="9010" --name php-fpm  lordius/alpine-php_fpm`
 
 ## How to configure with Mail service
 You need to listen to **SMTP** service that is linked inside containers:

@@ -11,9 +11,9 @@ ENV TWIG_PATH Twig-1.24.2
 ENV DRUSH_VERSION 8.x
 # Recreate user with correct params
 RUN set -e && \
-	addgroup -g 1000 -S www-data && \
-	adduser -u 1000 -D -S -s /bin/bash -G www-data www-data && \
-	sed -i '/^www-data/s/!/*/' /etc/shadow
+  addgroup -g 1000 -S www-data && \
+  adduser -u 1000 -D -S -s /bin/bash -G www-data www-data && \
+  sed -i '/^www-data/s/!/*/' /etc/shadow
 #install mysql-client, need for drush
 RUN apk add --no-cache mysql-client
 #install php-fpm
@@ -62,9 +62,9 @@ RUN cd /temp_docker && wget https://xdebug.org/files/xdebug-$XDEBUG_VERSION.tgz
 RUN cd /temp_docker && tar -xvzf xdebug-$XDEBUG_VERSION.tgz
 RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION && phpize
 RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION && ./configure
-RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION &&  make
-RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION &&  make test
-RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION &&  echo ";zend_extension = xdebug.so" > /etc/php5/conf.d/xdebug.ini
+RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION && make
+RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION && make test
+RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION && echo ";zend_extension = xdebug.so" > /etc/php5/conf.d/xdebug.ini
 RUN cp /temp_docker/xdebug-$XDEBUG_VERSION/modules/xdebug.so /usr/lib/php5/modules/xdebug.so
 
 RUN sed -i \
@@ -144,4 +144,3 @@ chown -R www-data:www-data /var/www/ && \
 chown -R www-data:www-data /var/log/
 WORKDIR /var/www/localhost/htdocs
 ENTRYPOINT ["docker-entrypoint.sh"]
-#EXPOSE 8000 9000

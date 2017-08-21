@@ -1,17 +1,14 @@
-#lordius/alpine-php_fpm:php-7
+#lordius/alpine-php_fpm
 FROM lordius/alpine-base:edge
 MAINTAINER lordius<andriy.khomych@gmail.com>
 #Envs
 ENV XDEBUG_VERSION 2.5.4
-#Twig version, compitable with php from 1.28.0
-ENV TWIG_VERSION v1.33.2
-ENV TWIG_PATH Twig-1.33.2
 #Memcached version
 ENV PHP_MEMCACHED 2.2.0
 #Drush version
 ENV DRUSH_VERSION 8.x
 #Update packages list
-RUN apk  --no-cache update
+RUN apk --no-cache update
 # Recreate user with correct params
 RUN set -e && \
 	addgroup -g 1000 -S www-data && \
@@ -30,7 +27,7 @@ RUN apk add --no-cache php7-fpm
 RUN apk add --no-cache php7-dev php7-openssl \
     php7-common php7-ftp php7-gd \
     php7-dom php7-pdo_mysql php7-sockets \
-    php7-zlib php7-bz2  php7-pear php7-cli \
+    php7-zlib php7-bz2 php7-pear php7-cli \
     php7-exif php7-phar php7-zip php7-calendar \
     php7-iconv php7-imap php7-soap php7-mbstring \
     php7-pdo php7-mysqli  php7-bcmath \
@@ -77,9 +74,9 @@ RUN cd /temp_docker && wget https://xdebug.org/files/xdebug-$XDEBUG_VERSION.tgz
 RUN cd /temp_docker && tar -xvzf xdebug-$XDEBUG_VERSION.tgz
 RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION && phpize
 RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION && ./configure
-RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION &&  make
-RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION &&  make test
-RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION &&  echo ";zend_extension = xdebug.so" > /etc/php7/conf.d/xdebug.ini
+RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION && make
+RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION && make test
+RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION && echo ";zend_extension = xdebug.so" > /etc/php7/conf.d/xdebug.ini
 RUN cp /temp_docker/xdebug-$XDEBUG_VERSION/modules/xdebug.so /usr/lib/php7/modules/xdebug.so
 
 RUN sed -i \
@@ -130,7 +127,7 @@ RUN sed -i \
 
 #Add setup drush and composer script
 COPY setup_extensions/composer_drush.sh /temp_docker/composer_drush.sh
-RUN  chmod -R +x /temp_docker && cd /temp_docker && bash /temp_docker/composer_drush.sh $DRUSH_VERSION
+RUN chmod -R +x /temp_docker && cd /temp_docker && bash /temp_docker/composer_drush.sh $DRUSH_VERSION
 #Clean trash
 RUN  rm -rf /var/lib/apt/lists/* && \
      rm -rf /var/cache/apk/* && \

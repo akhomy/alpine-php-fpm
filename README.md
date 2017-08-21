@@ -1,7 +1,7 @@
 # PHP-FPM image for LAMP stack
 PHP-7 FPM image based on Alpine Linux.
 
-##Main Built features
+## Main Built features
 * Ansible
 * Git
 * MySQL-Client
@@ -30,7 +30,7 @@ The example command with enabled **Cron**, **Sendmail** and **Xdebug**:
 
 `docker run -v /hostDir:/var/www/localhost/htdocs -d -e CRONTAB_ENABLED="1" -e PHP_FPM_PORT="9000" -e PHP_SENDMAIL_PATH="/usr/sbin/sendmail -i -t" -e PHP_SENDMAIL_HOST="smtp.host" -e PHP_SENDMAIL_PORT="1025" -e PHP_XDEBUG_ENABLED="1" -e PHP_XDEBUG_PORT="9010" -e PHP_MEMORY_LIMIT="1024M" --name php-fpm lordius/alpine-php_fpm:php-5`
 
-##How to access terminal in container
+## How to access terminal in container
 Run a command:
 
 `docker exec -it php-fpm-container-name --user www-data ash`

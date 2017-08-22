@@ -1,5 +1,5 @@
 # PHP-FPM image for LAMP stack
-PHP-7 FPM image based on Alpine Linux.
+PHP-7 FPM image based on the last Alpine Linux **PHP** packages(**php-7.1.***).
 
 ## Main Built features
 * Ansible

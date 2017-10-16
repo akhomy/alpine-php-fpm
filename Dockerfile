@@ -91,7 +91,7 @@ RUN sed -i \
 
 #Install php-redis
 RUN cd /temp_docker && git clone https://github.com/phpredis/phpredis.git && cd phpredis && \
-    git checkout php7 && git pull && \
+    git checkout php7-ipv6 && git pull && \
     phpize  && \
     ./configure  && \
     make && \

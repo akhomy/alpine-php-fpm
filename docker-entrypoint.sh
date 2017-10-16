@@ -3,7 +3,7 @@ set -e
 
 # Makes logs accessible for all users.
 if [ -n "$PHP_LOGS_FOR_ALL" ]; then
-  chmod -R 777 /var/logs
+  chmod -R 777 /var/log
 fi
 
 # Copy user defined configs from temp folder to existing.

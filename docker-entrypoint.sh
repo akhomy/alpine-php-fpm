@@ -1,6 +1,11 @@
 #!/bin/sh
 set -e
 
+# Makes logs accessible for all users.
+if [ -n "$PHP_LOGS_FOR_ALL" ]; then
+  chmod -R 777 /var/logs
+fi
+
 # Copy user defined configs from temp folder to existing.
 if [ "$(ls -A /temp_configs_dir)" ]; then
   cp -f -R /temp_configs_dir/* /etc/

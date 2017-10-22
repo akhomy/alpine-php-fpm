@@ -101,6 +101,8 @@ RUN cp /temp_docker/$TWIG_PATH/ext/twig/modules/twig.so /usr/lib/php5/modules/tw
 #Configure php-fpm by copy our config files
 RUN rm /etc/php5/php-fpm.conf
 ADD configs/php5/php-fpm.conf /etc/php5/php-fpm.conf
+RUN touch /var/log/fpm-php.www.log
+RUN chown -R www-data:www-data /var/log/fpm-php.www.log
 
 # Configure php-fpm.conf
 RUN sed -i \

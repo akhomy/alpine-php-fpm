@@ -44,6 +44,7 @@ Now, you could run inside container commands like, `composer install`, `php -v` 
 | Variable                          | Default Value | Description |
 | --------------------------------- | ------------- | ----------- |
 | DRUSH_VERSION                                |   `8.x`                                    | Global Drupal Drush version                                                  |
+| PHP_SHOW_ERRORS                              |   `;php_flag[display_errors] = off`        | Line *`php_flag[display_errors]`* in the **/etc/php7/php-fpm.conf**          |
 | PHP_FPM_PORT                                 |   `listen = 8000`                          | Line *`listen`* in the **/etc/php7/php-fpm.conf**                            |
 | PHP_MEMORY_LIMIT                             |   `memory_limit = 256M`                    | Line *`memory_limit`* in the **/etc/php7/php.ini**                           |
 | PHP_MAX_EXECUTION_TIME                       |   `max_execution_time = 150`               | Line *`max_execution_time`* in the **/etc/php7/php.ini**                     |

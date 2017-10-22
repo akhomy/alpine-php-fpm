@@ -1,9 +1,11 @@
 #!/bin/sh
 set -e
 
-# Makes logs accessible for all users.
-if [ -n "$PHP_LOGS_FOR_ALL" ]; then
-  chmod -R 777 /var/log
+# Set up specific drush version.
+if [ -n "$DRUSH_VERSION" ]; then
+    cd /usr/local/src/drush
+    git fetch origin
+    git checkout $DRUSH_VERSION
 fi
 
 # Copy user defined configs from temp folder to existing.

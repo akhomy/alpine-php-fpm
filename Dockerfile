@@ -101,6 +101,8 @@ RUN cd /temp_docker && git clone https://github.com/phpredis/phpredis.git && cd 
 #Configure php-fpm by copy our config files
 RUN rm /etc/php7/php-fpm.conf
 ADD configs/php7/php-fpm.conf /etc/php7/php-fpm.conf
+RUN touch /var/log/fpm-php.www.log
+RUN chown -R www-data:www-data /var/log/fpm-php.www.log
 
 # Configure php-fpm.conf
 RUN sed -i \

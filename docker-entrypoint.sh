@@ -15,13 +15,18 @@ fi
 
 if [ -z "$USE_ONLY_CONFIGS" ]; then
 
-  # Enable showing errors.
-  if [ "$PHP_SHOW_ERRORS" -eq "1" ]; then
+  # Log errors in FPM.
+  if [ "$PHP_FPM_LOG_ERRORS" -eq "1" ]; then
     sed -i 's/^;php_flag[display_errors].*/php_flag[display_errors] = on/' /etc/php7/php-fpm.conf
   fi
 
   if [ -n "$PHP_FPM_PORT" ]; then
     sed -i 's@^listen.*@'"listen  = ${PHP_FPM_PORT}"'@' /etc/php7/php-fpm.conf
+  fi
+  
+  # Show PHP errors.
+  if [ "$PHP_SHOW_ERRORS" -eq "1" ]; then
+    sed -i 's/^display_errors.*/display_errors = on/' /etc/php7/php.ini
   fi
 
   if [ -n "$PHP_MEMORY_LIMIT" ]; then

@@ -18,6 +18,7 @@ if [ -z "$USE_ONLY_CONFIGS" ]; then
   # Enable showing errors.
   if [ "$PHP_SHOW_ERRORS" -eq "1" ]; then
     sed -i 's/^;php_flag[display_errors].*/php_flag[display_errors] = on/' /etc/php5/php-fpm.conf
+    sed -i 's/^display_errors.*/display_errors = on/' /etc/php5/php.ini
   fi
 
   if [ -n "$PHP_SENDMAIL_PATH" ]; then

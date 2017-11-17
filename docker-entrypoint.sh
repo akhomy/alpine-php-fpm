@@ -64,6 +64,10 @@ if [ -z "$USE_ONLY_CONFIGS" ]; then
   if [ -n "$PHP_ALWAYS_POPULATE_RAW_POST_DATA" ]; then
     sed -i 's@^always_populate_raw_post_data.*@'"always_populate_raw_post_data = ${PHP_ALWAYS_POPULATE_RAW_POST_DATA}"'@' /etc/php7/php.ini
   fi
+  
+  if [ "$PHP_SHORT_OPEN_TAG" -eq "1" ]; then
+    sed -i "s/short_open_tag = .*/short_open_tag = On/" /etc/php7/php.ini
+  fi
 
   if [ -n "$PHP_SENDMAIL_PATH" ]; then
     sed -i 's@^;sendmail_path.*@'"sendmail_path = ${PHP_SENDMAIL_PATH}"'@' /etc/php7/php.ini

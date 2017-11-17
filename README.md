@@ -56,7 +56,7 @@ Now, you could run inside container commands like, `composer install`, `php -v` 
 | PHP_UPLOAD_MAX_FILESIZE                      |   `upload_max_filesize = 512M`             | Line *`upload_max_filesize`* in the **/etc/php5/php.ini**                    |
 | PHP_ALLOW_URL_FOPEN                          |   `allow_url_fopen = On`                   | Line *`allow_url_fopen`* in the **/etc/php5/php.ini**                        |
 | PHP_ALWAYS_POPULATE_RAW_POST_DATA            |   `always_populate_raw_post_data = -1`     | Line *`always_populate_raw_post_data`* in the **/etc/php5/php.ini**          |
-| PHP_SHORT_OPEN_TAG                           |   `short_open_tag = Off`                   | Line *`short_open_tag`* in the **/etc/php5/php.ini**                          |
+| PHP_SHORT_OPEN_TAG                           |   `0`                                      | Line *`short_open_tag`* in the **/etc/php5/php.ini**                          |
 | PHP_SENDMAIL_PATH                            |   `sendmail_path = opensmtpd`              | Line *`sendmail_path`* in the **/etc/php5/php.ini**                          |
 | PHP_SENDMAIL_HOST                            |   `relayhost = []:`,`myhostname =`         | Lines *`relayhost`*, *`myhostname`* in the **/etc/postfix/main.cf**          |
 | PHP_SENDMAIL_PORT                            |   Used as part for `relayhost=host:port`   | Line *`relayhost`* in the **/etc/postfix/main.cf**                           |

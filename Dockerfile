@@ -17,7 +17,7 @@ RUN set -e && \
 
 #install mysql-client, need for drush
 RUN apk add --no-cache mysql-client
-# Add memcached
+# Add memcached, redis
 RUN apk add libmemcached-dev redis
 #Create /temp_dir for using
 RUN mkdir /temp_docker && chmod -R +x /temp_docker && cd /temp_docker

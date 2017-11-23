@@ -1,3 +1,3 @@
 # Changelog
-## Alpline PHP-FPM 1.0.0
+## Alpline PHP7-FPM 1.0.0
 * Initial release.

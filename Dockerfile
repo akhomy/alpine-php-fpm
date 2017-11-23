@@ -101,7 +101,7 @@ RUN cd /temp_docker && git clone https://github.com/phpredis/phpredis.git && cd 
     make install && \
     echo 'extension=redis.so' > /etc/php7/conf.d/redis.ini
 
-# Install imagemagick
+# Install MongoDB PHP extension
 RUN sed -ie 's/-n//g' /usr/bin/pecl && \
     yes | pecl install mongodb && \
     echo 'extension=mongodb.so' > /etc/php7/conf.d/mongodb.ini && \

@@ -7,7 +7,9 @@ PHP-5 FPM image based on the last Alpine Linux **PHP** packages(**php-5.6.***).
 * MySQL-Client
 * Twig
 * PHP-FPM
-* PHP-Redis
+* PHP Redis
+* PHP PostgreSQL
+* PHP MongoDB
 * Xdebug
 * Uploadprogress
 * Imagemagick

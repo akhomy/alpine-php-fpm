@@ -1,13 +1,13 @@
 #lordius/alpine-php_fpm
 FROM lordius/alpine-base:edge
 MAINTAINER lordius<andriy.khomych@gmail.com>
-#Envs
+# Envs
 ENV XDEBUG_VERSION 2.5.4
-#Memcached version
+# Memcached version
 ENV PHP_MEMCACHED 2.2.0
-#Drush version
+# Drush version
 ENV DRUSH_VERSION 8.x
-#Update packages list
+# Update packages list
 RUN apk --no-cache update
 # Recreate user with correct params
 RUN set -e && \
@@ -15,28 +15,31 @@ RUN set -e && \
 	adduser -u 1000 -D -S -s /bin/bash -G www-data www-data && \
 	sed -i '/^www-data/s/!/*/' /etc/shadow
 
-#install mysql-client, need for drush
+# Install mysql-client, necessary for drush
 RUN apk add --no-cache mysql-client
 # Add memcached, redis
 RUN apk add libmemcached-dev redis
-#Create /temp_dir for using
+# Create /temp_dir for using
 RUN mkdir /temp_docker && chmod -R +x /temp_docker && cd /temp_docker
-#install php-fpm
+# Install php-fpm
 RUN apk add --no-cache php7-fpm
-#Install some php libs
+# Install base php libs
 RUN apk add --no-cache php7-dev php7-openssl \
     php7-common php7-ftp php7-gd \
-    php7-dom php7-pdo_mysql php7-sockets \
+    php7-dom  php7-sockets \
     php7-zlib php7-bz2 php7-pear php7-cli \
     php7-exif php7-phar php7-zip php7-calendar \
-    php7-iconv php7-imap php7-soap php7-mbstring \
-    php7-pdo php7-mysqli  php7-bcmath \
-    php7-mcrypt php7-curl php7-json php7-mysqlnd\
+    php7-iconv php7-imap php7-soap \
+    php7-mbstring php7-bcmath \
+    php7-mcrypt php7-curl php7-json \
     php7-opcache php7-ctype php7-xml \
     php7-xsl php7-ldap php7-xmlwriter php7-xmlreader \
     php7-intl php7-tokenizer php7-session  \
-    php7-pcntl php7-posix php7-apcu php7-simplexml
-#Copy crontab file for use later
+    php7-pcntl php7-posix php7-apcu php7-simplexml \
+    php7-pdo \
+    php7-mysqlnd php7-pdo_mysql php7-mysqli \
+    php7-pgsql php7-pdo_pgsql  
+# Copy crontab file for use later
 COPY crontasks.txt /home
 #RUN crontab /home/crontasks.txt
 
@@ -46,7 +49,7 @@ RUN echo "relayhost = [$PHP_SENDMAIL_HOST]:$PHP_SENDMAIL_PORT" >> /etc/postfix/m
     echo "inet_interfaces = all" >> /etc/postfix/main.cf && \
     echo "recipient_delimiter = +" >> /etc/postfix/main.cf
 
-#Install uploadprogress
+# Install uploadprogress
 RUN cd /temp_docker && git clone https://github.com/php/pecl-php-uploadprogress.git && cd pecl-php-uploadprogress && \
     phpize && \
     ./configure && \
@@ -54,22 +57,13 @@ RUN cd /temp_docker && git clone https://github.com/php/pecl-php-uploadprogress.
     make install && \
     echo 'extension=uploadprogress.so' > /etc/php7/conf.d/uploadprogress.ini
 
-#Install memcached
-RUN cd /temp_docker && git clone https://github.com/php-memcached-dev/php-memcached && \
-    cd php-memcached && git checkout php7 && git pull && \
-    phpize && \
-    ./configure --with-libmemcached-dir=no --disable-memcached-sasl && \
-    make && \
-    make install && \
-    echo 'extension=memcached.so' > /etc/php7/conf.d/memcached.ini
-
-#Install imagemagick
+# Install imagemagick
 RUN sed -ie 's/-n//g' /usr/bin/pecl && \
     yes | pecl install imagick && \
     echo 'extension=imagick.so' > /etc/php7/conf.d/imagick.ini && \
     rm -rf /tmp/pear
 
-#Install xdebug
+# Install xdebug
 RUN cd /temp_docker && wget https://xdebug.org/files/xdebug-$XDEBUG_VERSION.tgz
 RUN cd /temp_docker && tar -xvzf xdebug-$XDEBUG_VERSION.tgz
 RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION && phpize
@@ -89,7 +83,16 @@ RUN sed -i \
     -e "$ a xdebug.max_nesting_level = 256" \
     /etc/php7/conf.d/xdebug.ini
 
-#Install php-redis
+# Install memcached
+RUN cd /temp_docker && git clone https://github.com/php-memcached-dev/php-memcached && \
+    cd php-memcached && git checkout php7 && git pull && \
+    phpize && \
+    ./configure --with-libmemcached-dir=no --disable-memcached-sasl && \
+    make && \
+    make install && \
+    echo 'extension=memcached.so' > /etc/php7/conf.d/memcached.ini
+
+# Install php-redis
 RUN cd /temp_docker && git clone https://github.com/phpredis/phpredis.git && cd phpredis && \
     git checkout php7-ipv6 && git pull && \
     phpize  && \
@@ -98,7 +101,13 @@ RUN cd /temp_docker && git clone https://github.com/phpredis/phpredis.git && cd 
     make install && \
     echo 'extension=redis.so' > /etc/php7/conf.d/redis.ini
 
-#Configure php-fpm by copy our config files
+# Install imagemagick
+RUN sed -ie 's/-n//g' /usr/bin/pecl && \
+    yes | pecl install mongodb && \
+    echo 'extension=mongodb.so' > /etc/php7/conf.d/mongodb.ini && \
+    rm -rf /tmp/pear
+
+# Configure php-fpm by copy our config files
 RUN rm /etc/php7/php-fpm.conf
 ADD configs/php7/php-fpm.conf /etc/php7/php-fpm.conf
 RUN touch /var/log/fpm-php.www.log
@@ -127,16 +136,16 @@ RUN sed -i \
     git config --global user.email "admin@lordius.com" && \
     git config --global push.default current
 
-#Add setup drush and composer script
+# Add setup drush and composer script
 COPY setup_extensions/composer_drush.sh /temp_docker/composer_drush.sh
 RUN chmod -R +x /temp_docker && cd /temp_docker && bash /temp_docker/composer_drush.sh $DRUSH_VERSION
-#Clean trash
+# Clean trash
 RUN  rm -rf /var/lib/apt/lists/* && \
      rm -rf /var/cache/apk/* && \
      rm -rf /var/www/localhost/htdocs/* && \
      rm -rf /temp_docker
 
-#Create /temp_configs_dir for use
+# Create /temp_configs_dir for use
 RUN mkdir /temp_configs_dir && chmod -R +x /temp_configs_dir && cd /temp_configs_dir
 
 COPY docker-entrypoint.sh /usr/local/bin/

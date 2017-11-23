@@ -6,8 +6,10 @@ PHP-7 FPM image based on the last Alpine Linux **PHP** packages(**php-7.1.***).
 * Git
 * MySQL-Client
 * PHP-FPM
-* PHP-Memcached
-* PHP-Redis
+* PHP Memcached
+* PHP Redis
+* PHP PostgreSQL
+* PHP MongoDB
 * Xdebug
 * Uploadprogress
 * Imagemagick

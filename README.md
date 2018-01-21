@@ -97,4 +97,4 @@ You could check work with the command:
 
 ## Full LAMP stack
 
-See [Docker Compose LAMP](https://github.com/a-kom/docker-compose-lamp)
+See [Docker Compose LAMP](https://github.com/a-kom/docker-compose-lamp).

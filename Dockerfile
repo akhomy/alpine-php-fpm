@@ -1,6 +1,6 @@
 #lordius/alpine-php_fpm
 FROM lordius/alpine-base:edge
-MAINTAINER lordius<andriy.khomych@gmail.com>
+LABEL maintainer=andriy.khomych@gmail.com
 # Envs
 ENV XDEBUG_VERSION 2.5.4
 # Memcached version

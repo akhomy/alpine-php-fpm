@@ -2,9 +2,7 @@
 FROM lordius/alpine-base:edge
 LABEL maintainer=andriy.khomych@gmail.com
 # Envs
-ENV XDEBUG_VERSION 2.5.4
-# Memcached version
-ENV PHP_MEMCACHED 2.2.0
+ENV XDEBUG_VERSION 2.6.0
 # Drush version
 ENV DRUSH_VERSION 8.x
 # Update packages list

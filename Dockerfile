@@ -81,7 +81,7 @@ RUN sed -i \
     -e "$ a xdebug.max_nesting_level = 256" \
     -e "$ a xdebug.profiler_enable = 0" \
     -e "$ a xdebug.profiler_enable_trigger = 1" \    
-    -e "$ a xdebug.profiler_output_dir = /tmp" \        
+    -e "$ a xdebug.profiler_output_dir = /tmp/xdebug/profiler" \        
     /etc/php7/conf.d/xdebug.ini
 
 # Install memcached

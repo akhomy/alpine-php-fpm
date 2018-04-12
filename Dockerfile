@@ -62,7 +62,7 @@ RUN sed -ie 's/-n//g' /usr/bin/pecl && \
     rm -rf /tmp/pear
 
 # Install xdebug
-RUN mkdir /tmp/xdebug/profiler && chmod -R +x /tmp/xdebug/profiler
+RUN mkdir /var/xdebug && mkdir /var/xdebug/profiler && chmod -R +x /var/xdebug/profiler
 RUN cd /temp_docker && wget https://xdebug.org/files/xdebug-$XDEBUG_VERSION.tgz
 RUN cd /temp_docker && tar -xvzf xdebug-$XDEBUG_VERSION.tgz
 RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION && phpize
@@ -81,7 +81,7 @@ RUN sed -i \
     -e "$ a xdebug.max_nesting_level = 256" \
     -e "$ a xdebug.profiler_enable = 0" \
     -e "$ a xdebug.profiler_enable_trigger = 1" \    
-    -e "$ a xdebug.profiler_output_dir = /tmp/xdebug/profiler" \        
+    -e "$ a xdebug.profiler_output_dir = /var/xdebug/profiler" \        
     /etc/php7/conf.d/xdebug.ini
 
 # Install memcached

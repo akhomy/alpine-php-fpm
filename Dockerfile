@@ -62,6 +62,7 @@ RUN sed -ie 's/-n//g' /usr/bin/pecl && \
     rm -rf /tmp/pear
 
 # Install xdebug
+RUN mkdir /tmp/xdebug/profiler && chmod -R +x /tmp/xdebug/profiler
 RUN cd /temp_docker && wget https://xdebug.org/files/xdebug-$XDEBUG_VERSION.tgz
 RUN cd /temp_docker && tar -xvzf xdebug-$XDEBUG_VERSION.tgz
 RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION && phpize
@@ -70,7 +71,6 @@ RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION && make
 RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION && make test
 RUN cd /temp_docker && cd xdebug-$XDEBUG_VERSION && echo ";zend_extension = xdebug.so" > /etc/php7/conf.d/xdebug.ini
 RUN cp /temp_docker/xdebug-$XDEBUG_VERSION/modules/xdebug.so /usr/lib/php7/modules/xdebug.so
-
 RUN sed -i \
     -e "$ a xdebug.default_enable = 0" \
     -e "$ a xdebug.remote_enable = 1" \

@@ -1,5 +1,5 @@
-#lordius/alpine-php_fpm
-FROM lordius/alpine-base:edge
+# lordius/alpine-php_fpm:php-7.1
+FROM lordius/alpine-base:v3.7
 LABEL maintainer=andriy.khomych@gmail.com
 # Envs
 ENV XDEBUG_VERSION 2.6.0

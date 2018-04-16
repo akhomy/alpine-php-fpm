@@ -1,5 +1,5 @@
 # PHP-FPM image for Docker Compose LAMP stack
-PHP-7 FPM image based on the last Alpine Linux **PHP** packages(**php-7.1.***).
+PHP-7 FPM image based on the last Alpine Linux **PHP** packages(**php-7.*.***).
 
 ## Main Built features
 * Ansible

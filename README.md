@@ -85,7 +85,7 @@ You need to listen to **SMTP** service that is linked inside containers:
 
 After run container execute:
 
-`docker exec -it php-fpm-container-name --user www-data /bin/ash`
+`docker exec -it --user www-data --env COLUMNS=100 --env LINES=100 php-fpm-container-name ash`
 
 Inside container go to **PHP** file directory:
 

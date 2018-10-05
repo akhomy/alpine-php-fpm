@@ -55,12 +55,6 @@ RUN cd /temp_docker && git clone https://github.com/php/pecl-php-uploadprogress.
     make install && \
     echo 'extension=uploadprogress.so' > /etc/php7/conf.d/uploadprogress.ini
 
-# Install imagemagick
-RUN sed -ie 's/-n//g' /usr/bin/pecl && \
-    yes | pecl install imagick && \
-    echo 'extension=imagick.so' > /etc/php7/conf.d/imagick.ini && \
-    rm -rf /tmp/pear
-
 # Install xdebug
 RUN mkdir /var/xdebug && chmod -R +x /var/xdebug
 RUN cd /temp_docker && wget https://xdebug.org/files/xdebug-$XDEBUG_VERSION.tgz

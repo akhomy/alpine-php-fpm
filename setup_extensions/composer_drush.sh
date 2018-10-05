@@ -10,4 +10,3 @@ cd /usr/local/src/drush
 git checkout $1  #or whatever version you want. for example master
 ln -s /usr/local/src/drush/drush /usr/bin/drush
 composer install
-drush --version

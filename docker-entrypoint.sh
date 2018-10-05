@@ -4,7 +4,6 @@ set -e
 # Set up specific drush version.
 if [ -n "$DRUSH_VERSION" ]; then
     cd /usr/local/src/drush
-    git fetch origin
     git checkout $DRUSH_VERSION
 fi
 

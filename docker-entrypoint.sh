@@ -1,12 +1,6 @@
 #!/bin/sh
 set -e
 
-# Set up specific drush version.
-if [ -n "$DRUSH_VERSION" ]; then
-    cd /usr/local/src/drush
-    git checkout $DRUSH_VERSION
-fi
-
 # Copy user defined configs from temp folder to existing.
 if [ "$(ls -A /temp_configs_dir)" ]; then
   cp -f -R /temp_configs_dir/* /etc/

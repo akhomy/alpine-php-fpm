@@ -5,4 +5,3 @@ mv composer.phar /usr/local/bin/composer
 ln -s /usr/local/bin/composer /usr/bin/composer
 
 composer global require drush/drush:8.*
-drush --version

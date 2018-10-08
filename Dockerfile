@@ -2,7 +2,7 @@
 FROM lordius/alpine-base:edge
 LABEL maintainer=andriy.khomych@gmail.com
 # Envs
-ENV XDEBUG_VERSION 2.6.0
+ENV XDEBUG_VERSION 2.6.1
 # Drush version
 ENV DRUSH_VERSION 8.x
 # Update packages list

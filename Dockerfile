@@ -1,7 +1,8 @@
 # akhomy/alpine-php-fpm
 ARG BASE_IMAGE_TAG=latest
 FROM akhomy/alpine-base:${BASE_IMAGE_TAG}
-ENV IMAGE_EXTENSIONS=core
+ARG IMAGE_EXTENSIONS=core
+ENV IMAGE_EXTENSIONS=${IMAGE_EXTENSIONS}
 LABEL maintainer=andriy.khomych@gmail.com
 ### Updates packages list.
 RUN apk --no-cache update

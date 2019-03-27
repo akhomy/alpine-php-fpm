@@ -1,7 +1,7 @@
 # PHP-FPM image for Docker Compose LAMP stack
 PHP-7 FPM image based on the last Alpine Linux **PHP** packages(**php-7.*.***).
 
-## Main Built features
+## Included packages
 * Ansible
 * Git
 * MySQL-Client
@@ -30,7 +30,7 @@ You could mount to `/temp_configs_dir` with your volume and use own configs. Var
 
 The example command with enabled **Cron**, **Sendmail** and **Xdebug**:
 
-`docker run -v /hostDir:/var/www/localhost/htdocs -d -e CRONTAB_ENABLED="1" -e PHP_FPM_PORT="9000" -e PHP_SENDMAIL_PATH="/usr/sbin/sendmail -i -t" -e PHP_SENDMAIL_HOST="smtp.host" -e PHP_SENDMAIL_PORT="1025" -e PHP_XDEBUG_ENABLED="1" -e PHP_XDEBUG_PORT="9010" -e PHP_MEMORY_LIMIT="1024M" --name php-fpm lordius/alpine-php_fpm`
+`docker run -v /hostDir:/var/www/localhost/htdocs -d -e CRONTAB_ENABLED="1" -e PHP_FPM_PORT="9000" -e PHP_SENDMAIL_PATH="/usr/sbin/sendmail -i -t" -e PHP_SENDMAIL_HOST="smtp.host" -e PHP_SENDMAIL_PORT="1025" -e PHP_XDEBUG_ENABLED="1" -e PHP_XDEBUG_PORT="9010" -e PHP_MEMORY_LIMIT="1024M" --name php-fpm akhomy/alpine-php_fpm`
 
 ## How to access terminal in container
 Run a command:
@@ -69,17 +69,17 @@ Now, you could run inside container commands like, `composer install`, `php -v` 
 ## How to use Cron
 After enabling option **CRONTAB_ENABLED="1"**, you need to mount file **crontask.txt** in the container file - **/home/crontasks.txt**, e.g:
 
-`docker run -v /hostDir:/var/www/localhost/htdocs -v  crontasks.txt:/home/crontasks.txt -d -e PHP_FPM_PORT="9000" -e CRONTAB_ENABLED="1" --name php-fpm  lordius/alpine-php_fpm`
+`docker run -v /hostDir:/var/www/localhost/htdocs -v  crontasks.txt:/home/crontasks.txt -d -e PHP_FPM_PORT="9000" -e CRONTAB_ENABLED="1" --name php-fpm  akhomy/alpine-php_fpm`
 
 ## How to use Xdebug
 You need to run container with option **PHP_XDEBUG_ENABLED=1** and provide value port for the option **PHP_XDEBUG_PORT**:
 
-`docker run -v /hostDir:/var/www/localhost/htdocs -d -e PHP_FPM_PORT="9000" -e PHP_XDEBUG_ENABLED="1" -e PHP_XDEBUG_PORT="9010" --name php-fpm  lordius/alpine-php_fpm`
+`docker run -v /hostDir:/var/www/localhost/htdocs -d -e PHP_FPM_PORT="9000" -e PHP_XDEBUG_ENABLED="1" -e PHP_XDEBUG_PORT="9010" --name php-fpm  akhomy/alpine-php_fpm`
 
 ## How to configure with Mail service
 You need to listen to **SMTP** service that is linked inside containers:
 
-`docker run -v /hostDir:/var/www/localhost/htdocs -d -e PHP_FPM_PORT="9000" -e PHP_SENDMAIL_PATH="/usr/sbin/sendmail -i -t" -e PHP_SENDMAIL_HOST="smtp.host" -e PHP_SENDMAIL_PORT="1025" --name php-fpm  lordius/alpine-php_fpm`
+`docker run -v /hostDir:/var/www/localhost/htdocs -d -e PHP_FPM_PORT="9000" -e PHP_SENDMAIL_PATH="/usr/sbin/sendmail -i -t" -e PHP_SENDMAIL_HOST="smtp.host" -e PHP_SENDMAIL_PORT="1025" --name php-fpm  akhomy/alpine-php_fpm`
 
 ## How to use Drush
 
@@ -91,10 +91,10 @@ Inside container go to **PHP** file directory:
 
 ` cd /var/www/html/localhost`
 
-You could check work with the command: 
+You could check work with the command:
 
 `drush version`
 
 ## Full LAMP stack
 
-See [Docker Compose LAMP](https://github.com/a-kom/docker-compose-lamp).
+See [Docker Compose LAMP](https://github.com/akhomy/docker-compose-lamp).

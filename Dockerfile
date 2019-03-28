@@ -32,6 +32,8 @@ COPY crontasks.txt /home
 RUN /bin/sh /tools/clean.sh
 # Uninstall build tools.
 RUN /bin/sh /tools/uninstall-build-tools.sh
+# Create /temp_configs_dir for using
+RUN mkdir /temp_configs_dir && chmod -R +x /temp_configs_dir && cd /temp_configs_dir
 # Entrypoint.
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh && mkdir -p /var/www/localhost/htdocs && \

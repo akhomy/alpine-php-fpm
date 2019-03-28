@@ -3,8 +3,8 @@ set -e
 
 # Set up specific drush version.
 if [ -n "$DRUSH_VERSION" ] && [ -z $(drush --version|sed "/$DRUSH_VERSION/d") ]; then
-    export PATH="$(composer config -g home)/vendor/bin:$PATH"
-    export CGR_BIN_DIR=$HOME/bin
+    export PATH="$(composer config -g home)/vendor/bin:$PATH";
+    export CGR_BIN_DIR=$HOME/bin;
     cgr drush/drush:"$DRUSH_VERSION";
 fi
 
@@ -50,7 +50,7 @@ if [ -z "$USE_ONLY_CONFIGS" ]; then
     fi
 
     if [ -n "$PHP_OPCACHE_ENABLE" ]; then
-        sed -i 's@^opcache.enable.*@'"opcache\.enable = ${PHP_OPCACHE_ENABLE}"'@' /etc/php7/conf.d/php.ini
+        sed -i 's@^opcache.enable.*@'"opcache\.enable = ${PHP_OPCACHE_ENABLE}"'@' /etc/php7/php.ini
     fi
 
     if [ -n "$PHP_OPCACHE_ENABLE_CLI" ]; then

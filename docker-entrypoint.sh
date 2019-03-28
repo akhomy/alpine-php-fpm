@@ -13,8 +13,9 @@ if [ "$(ls -A /temp_configs_dir)" ]; then
     cp -f -R /temp_configs_dir/* /etc/
 fi
 
-if [ -z "$USE_ONLY_CONFIGS" ]; then
-
+if [ "$USE_ONLY_CONFIGS" -eq "1" ]; then
+    echo $USE_ONLY_CONFIGS;
+else
     # Show PHP errors.
     if [ "$PHP_SHOW_ERRORS" -eq "1" ]; then
         sed -i 's/^;php_flag[display_errors].*/php_flag[display_errors] = on/' /etc/php7/php-fpm.conf

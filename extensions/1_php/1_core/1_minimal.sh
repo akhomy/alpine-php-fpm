@@ -9,6 +9,7 @@ apk add --no-cache \
     php7-ctype \
     php7-dom \
     php7-exif \
+    php7-fileinfo \
     php7-gd \
     php7-iconv \
     php7-intl \

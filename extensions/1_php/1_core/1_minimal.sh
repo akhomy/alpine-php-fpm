@@ -1,32 +1,32 @@
 #!/bin/bash
 apk add --no-cache \
-    php7-apcu \
-    php7-bcmath \
-    php7-bz2 \
-    php7-calendar \
-    php7-cli \
-    php7-common \
-    php7-ctype \
-    php7-dom \
-    php7-exif \
-    php7-gd \
-    php7-iconv \
-    php7-intl \
-    php7-json \
-    php7-mbstring \
-    php7-mcrypt \
-    php7-pcntl \
-    php7-pdo \
-    php7-posix \
-    php7-session  \
-    php7-simplexml \
-    php7-tokenizer \
-    php7-xml \
-    php7-xmlreader \
-    php7-xmlwriter \
-    php7-xsl \
-    php7-zip \
-    php7-zlib \
+    php5-apcu \
+    php5-bcmath \
+    php5-bz2 \
+    php5-calendar \
+    php5-cli \
+    php5-common \
+    php5-ctype \
+    php5-dom \
+    php5-exif \
+    php5-gd \
+    php5-iconv \
+    php5-intl \
+    php5-json \
+    php5-mbstring \
+    php5-mcrypt \
+    php5-pcntl \
+    php5-pdo \
+    php5-posix \
+    php5-session  \
+    php5-simplexml \
+    php5-tokenizer \
+    php5-xml \
+    php5-xmlreader \
+    php5-xmlwriter \
+    php5-xsl \
+    php5-zip \
+    php5-zlib \
     ;
 
 sed -i \
@@ -39,4 +39,4 @@ sed -i \
     -e "s/^allow_url_fopen.*/allow_url_fopen = On/" \
     -e "s/^;always_populate_raw_post_data.*/always_populate_raw_post_data = -1/" \
     -e "s/^;sendmail_path.*/;sendmail_path = opensmtpd/" \
-    /etc/php7/php.ini
+    /etc/php5/php.ini

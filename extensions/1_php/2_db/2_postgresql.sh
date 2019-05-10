@@ -1,2 +1,2 @@
 #!/bin/bash
-apk add postgresql-dev php7-pgsql php7-pdo_pgsql
+apk add postgresql-dev php5-pgsql php5-pdo_pgsql

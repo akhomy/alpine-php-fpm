@@ -1,2 +1,2 @@
 #!/bin/bash
-apk add --no-cache mysql-client php7-mysqlnd php7-pdo_mysql php7-mysqli
+apk add --no-cache mysql-client php5-mysql php5-pdo_mysql php5-mysqli

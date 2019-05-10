@@ -1,5 +1,5 @@
 # akhomy/alpine-php-fpm
-ARG BASE_IMAGE_TAG=latest
+ARG BASE_IMAGE_TAG=3.5-ultimate
 FROM akhomy/alpine-base:${BASE_IMAGE_TAG}
 ARG IMAGE_EXTENSIONS=core
 ENV IMAGE_EXTENSIONS=${IMAGE_EXTENSIONS}

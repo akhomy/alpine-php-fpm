@@ -1,13 +1,6 @@
 #!/bin/sh
 set -e
 
-# Set up specific drush version.
-if [ -n "$DRUSH_VERSION" ] && [ -z $(drush --version|sed "/$DRUSH_VERSION/d") ]; then
-    export PATH="$(composer config -g home)/vendor/bin:$PATH";
-    export CGR_BIN_DIR=$HOME/bin;
-    cgr drush/drush:"$DRUSH_VERSION";
-fi
-
 # Copy user defined configs from temp folder to existing.
 if [ "$(ls -A /temp_configs_dir)" ]; then
     cp -f -R /temp_configs_dir/* /etc/
@@ -114,4 +107,4 @@ else
 
 fi
 
-/usr/sbin/php-fpm7 -F
+/usr/bin/php-fpm -F

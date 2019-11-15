@@ -3,9 +3,8 @@ set -e
 
 # Set up specific drush version.
 if [ -n "$DRUSH_VERSION" ] && [ -z $(drush --version|sed "/$DRUSH_VERSION/d") ]; then
-    export PATH="$(composer config -g home)/vendor/bin:$PATH";
-    export CGR_BIN_DIR=$HOME/bin;
-    cgr drush/drush:"$DRUSH_VERSION";
+    COMPOSER_HOME=/opt/drush COMPOSER_BIN_DIR=/usr/local/bin COMPOSER_VENDOR_DIR=/opt/drush/"$DRUSH_VERSION" composer require drush/drush:^"$DRUSH_VERSION"
+    cd /opt/drush/"$DRUSH_VERSION"/drush/drush/ && composer update
 fi
 
 # Copy user defined configs from temp folder to existing.

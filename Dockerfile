@@ -20,6 +20,10 @@ COPY tools/ /tools/
 RUN /bin/ash /tools/install-build-tools.sh
 ### Copies extensions.
 COPY extensions/ /temp_docker/extensions
+### Fixes
+## libiconv pdf issue.
+RUN apk add gnu-libiconv --update-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 ### Copies configs.
 COPY configs/ /temp_docker/php-fpm/configs
 # Installs extensions.

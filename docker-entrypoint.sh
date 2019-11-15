@@ -1,6 +1,12 @@
 #!/bin/sh
 set -e
 
+# Set up specific drush version.
+if [ -n "$DRUSH_VERSION" ] && [ -z $(drush --version|sed "/$DRUSH_VERSION/d") ]; then
+    COMPOSER_HOME=/opt/drush COMPOSER_BIN_DIR=/usr/local/bin COMPOSER_VENDOR_DIR=/opt/drush/"$DRUSH_VERSION" composer require drush/drush:^"$DRUSH_VERSION"
+    cd /opt/drush/"$DRUSH_VERSION"/drush/drush/ && composer update
+fi
+
 # Copy user defined configs from temp folder to existing.
 if [ "$(ls -A /temp_configs_dir)" ]; then
     cp -f -R /temp_configs_dir/* /etc/

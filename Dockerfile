@@ -22,6 +22,10 @@ RUN /bin/ash /tools/install-build-tools.sh
 COPY extensions/ /temp_docker/extensions
 ### Copies configs.
 COPY configs/ /temp_docker/php-fpm/configs
+### Fixes
+## libiconv pdf issue.
+RUN apk add gnu-libiconv --update-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 # Installs extensions.
 ARG DRUSH_VERSION=8
 ARG XDEBUG_VERSION=2.4.1

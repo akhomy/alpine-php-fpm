@@ -23,7 +23,7 @@ COPY extensions/ /temp_docker/extensions
 ### Copies configs.
 COPY configs/ /temp_docker/php-fpm/configs
 # Installs extensions.
-ARG DRUSH_VERSION=8.x
+ARG DRUSH_VERSION=8
 ARG XDEBUG_VERSION=2.7.0
 RUN /bin/sh /tools/installer.sh ${IMAGE_EXTENSIONS} /temp_docker/extensions /temp_docker/extensions/
 ### Cron.

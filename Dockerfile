@@ -23,9 +23,8 @@ COPY extensions/ /temp_docker/extensions
 ### Copies configs.
 COPY configs/ /temp_docker/php-fpm/configs
 # Installs extensions.
-ARG DRUSH_VERSION=8.x
+ARG DRUSH_VERSION=8
 ARG XDEBUG_VERSION=2.4.1
-ARG XDEBUG_VERSION=2.6.0
 ARG PHP_REDIS_VERSION=2.2.8
 ARG TWIG_VERSION=v1.24.2
 ARG TWIG_PATH=Twig-1.24.2

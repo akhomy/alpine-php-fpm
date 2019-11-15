@@ -13,20 +13,16 @@ apk add --no-cache \
     php5-iconv \
     php5-intl \
     php5-json \
-    php5-mbstring \
     php5-mcrypt \
     php5-pcntl \
     php5-pdo \
     php5-posix \
-    php5-session  \
-    php5-simplexml \
-    php5-tokenizer \
     php5-xml \
     php5-xmlreader \
-    php5-xmlwriter \
     php5-xsl \
     php5-zip \
     php5-zlib \
+    php5-dev \
     ;
 
 sed -i \

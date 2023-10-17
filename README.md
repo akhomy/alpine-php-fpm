@@ -1,7 +1,10 @@
+# Status
+Archived in favor of other tools.
+
 # PHP-FPM image for Docker Compose LAMP stack
 PHP-7 FPM image based on the last Alpine Linux **PHP** packages(**php-7.*.***).
 
-## Possible packages. Depends on build image options and parent image.
+## Possible packages. Depends on the build image options and the parent image.
 * Ansible
 * Git
 * MySQL client
